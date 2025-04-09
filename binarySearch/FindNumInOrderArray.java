@@ -11,16 +11,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import util.GetRandomArray;
+import util.Print;
+
 public class FindNumInOrderArray {
 
     private Random random = new Random();
-
-    private void printArray(ArrayList array) {
-        for (int i = 0; i < array.size(); i++) {
-            System.out.print(array.get(i) + " ");
-        }
-        System.out.println();
-    }
 
     private int process(ArrayList<Integer> array, int target) {
         int result = -1;
@@ -42,15 +38,22 @@ public class FindNumInOrderArray {
 
     public static void main(String[] args) {
         int length = 20;
-        ArrayList array = new ArrayList<Integer>();
+        int times = 1000;
+        int ceiling = 20;
+        int ground = 0;
+        int target = 8;
         FindNumInOrderArray findNum = new FindNumInOrderArray();
-        for (int i = 0; i < length; i++) {
-            array.add(findNum.random.nextInt(20));
+        System.out.println("test started");
+        for (int i = 0; i < times; i++) {
+            ArrayList array = GetRandomArray.getRandomArrayList(length, ceiling, ground);
+            array.sort(null);
+            int result = findNum.process(array, target);
+            int answer = array.indexOf(target);
+            if (answer != result && (int) array.get(result) != target) {
+                Print.printArray(array);
+                System.out.println("result: " + result);
+            }
         }
-        findNum.printArray(array);
-        array.sort(null);
-        findNum.printArray(array);
-        int result = findNum.process(array, 8);
-        System.out.println(result);
+        System.out.println("test finished");
     }
 }

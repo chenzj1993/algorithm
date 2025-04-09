@@ -11,7 +11,10 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class FindLastRightNumInOrderArray {
+import util.GetRandomArray;
+import util.Print;
+
+public class FindLastTargetNumInOrderArray {
 
     private Random random = new Random();
 
@@ -33,7 +36,7 @@ public class FindLastRightNumInOrderArray {
                 right = mid - 1;
             } else {
                 result = mid;
-                left = mid +1;
+                left = mid + 1;
             }
         }
         return array.get(result) == target ? result : -1;
@@ -41,15 +44,22 @@ public class FindLastRightNumInOrderArray {
 
     public static void main(String[] args) {
         int length = 20;
-        ArrayList array = new ArrayList<Integer>();
-        FindLastRightNumInOrderArray findNum = new FindLastRightNumInOrderArray();
-        for (int i = 0; i < length; i++) {
-            array.add(findNum.random.nextInt(8));
+        int times = 1000;
+        int target = 5;
+        FindLastTargetNumInOrderArray findNum = new FindLastTargetNumInOrderArray();
+        System.out.println("test started");
+        for (int i = 0; i < times; i++) {
+            ArrayList<Integer> array = GetRandomArray.getRandomArrayList(length, 10, 0);
+            array.sort(null);
+            int answer = array.lastIndexOf(target);
+
+            int result = findNum.process(array, target);
+            if (answer != result) {
+                Print.printArray(array);
+                System.out.println("answer: " + answer);
+                System.out.println("result: " + result);
+            }
         }
-        findNum.printArray(array);
-        array.sort(null);
-        findNum.printArray(array);
-        int result = findNum.process(array, 5);
-        System.out.println(result);
+        System.out.println("test finished");
     }
 }

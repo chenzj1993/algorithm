@@ -1,12 +1,5 @@
+import util.GetRandomStr;
 
-/*
- * @Author: chenzj1993 chenzj1993@gmail.com
- * @Date: 2025-04-05 23:46:35
- * @LastEditors: chenzj1993 chenzj1993@gmail.com
- * @LastEditTime: 2025-04-06 00:31:45
- * @FilePath: \algorithm\KMP.java
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 public class KMP {
 
     private int[] helpArray(String str) {
@@ -60,11 +53,20 @@ public class KMP {
     }
 
     public static void main(String[] args) {
-        String str = "aabbaaabb";
-        String cmp = "aabb";
-        KMP kmp = new KMP();
-        int index = kmp.kmp(str, cmp);
-        System.out.println(index);
+        System.out.println("test started");
+        for (int i = 0; i < 1000; i++) {
+            String str = GetRandomStr.getRandomStr(100);
+            String cmp = GetRandomStr.getRandomStr(3);
+            KMP kmp = new KMP();
+            int result = kmp.kmp(str, cmp);
+            int answer = str.indexOf(cmp);
+            if (result != answer) {
+                System.out.println(str);
+                System.out.println("answer: " + answer);
+                System.out.println("result: " + result);
+            }
 
+        }
+        System.out.println("test finished");
     }
 }

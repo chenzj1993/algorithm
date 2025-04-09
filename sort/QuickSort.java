@@ -1,25 +1,13 @@
-/*
- * @Author: chenzj1993 chenzj1993@gmail.com
- * @Date: 2025-04-05 09:28:52
- * @LastEditors: chenzj1993 chenzj1993@gmail.com
- * @LastEditTime: 2025-04-05 23:44:01
- * @FilePath: \algorithm\reverseList.java
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFilecurer查看配置 进行设置: https://github.com/OBKoro1/koro1Filecurer/wiki/%E9%85%8D%E7%BD%AE
- */
 
 import java.util.Random;
+
+import util.GetRandomArray;
+import util.Print;
 
 public class QuickSort {
     private Random random = new Random();
 
-    public static void printList(int[] list, int length) {
-        for (int i = 0; i < length; i++) {
-            System.out.print(list[i] + " ");
-        }
-        System.out.println();
-    }
-
-    private void process(int[] list, int left, int right) {
+    private void process(Integer[] list, int left, int right) {
         if (left >= right) {
             return;
         }
@@ -55,14 +43,18 @@ public class QuickSort {
 
     public static void main(String[] args) {
         int length = 10;
-        int[] list = new int[length];
         QuickSort sort = new QuickSort();
-        for (var i = 0; i < length; i++) {
-            list[i] = sort.random.nextInt(100);
+        System.out.println("test started");
+        for (int i = 0; i < 1000; i++) {
+            Integer[] array = GetRandomArray.getRandomArray(length, 100, 0);
+            sort.process(array, 0, length - 1);
+            for (int j = 0; j < length - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    Print.printArray(array, length);
+                }
+            }
         }
-        printList(list, length);
-        sort.process(list, 0, length - 1);
-        printList(list, length);
+        System.out.println("test finished");
 
     }
 }
