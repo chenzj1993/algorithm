@@ -50,7 +50,7 @@ public class QuickSort {
             sort.process(array, 0, length - 1);
             for (int j = 0; j < length - 1; j++) {
                 if (array[j] > array[j + 1]) {
-                    Print.printArray(array, length);
+                    Print.printArray(array);
                 }
             }
         }
